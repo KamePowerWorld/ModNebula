@@ -56,7 +56,7 @@ export class MiscFileStructure extends ModuleStructure {
         return name
     }
     protected async getModuleUrl(name: string, path: string, stats: Stats): Promise<string> {
-        return new URL(join(this.relativeRoot, ...path.substr(this.containerDirectory.length+1).split(sep)), this.baseUrl).toString()
+        return new URL(join(this.relativeRoot, ...path.substr(this.containerDirectory.length+1).split(sep).map(s => encodeURIComponent(s))), this.baseUrl).toString()
     }
     protected async getModulePath(name: string, path: string, stats: Stats): Promise<string | null> {
         return path.substr(this.containerDirectory.length+1).replace(/\\/g, '/')
